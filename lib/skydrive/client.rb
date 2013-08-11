@@ -80,6 +80,8 @@ module Skydrive
             return Skydrive::Collection.new(self, filtered_response["data"])
           elsif filtered_response["location"]
             return filtered_response
+          elsif filtered_response["link"] && filtered_response.length == 1
+            return filtered_response["link"]
           elsif filtered_response["id"].match /^comment\..+/
             return Skydrive::Comment.new(self, filtered_response)
           else
